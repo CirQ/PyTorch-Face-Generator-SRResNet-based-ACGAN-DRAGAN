@@ -43,13 +43,10 @@ class AttrDataset(Dataset):
 
 
 face_transform = transforms.Compose([
-           transforms.Scale(128),
-           transforms.CenterCrop(size=128),
-           transforms.RandomHorizontalFlip(),
-           transforms.ToTensor(),
-       ])
+   transforms.ToTensor(),
+])
 
 
 print('Preparing dataset A...')
-A_train_dataset = AttrDataset('face_attr.csv', DATA_PATH, transform=face_transform)
+A_train_dataset = AttrDataset(TAG_PATH, IMAGE_PATH, transform=face_transform)
 train_loader = DataLoader(A_train_dataset, batch_size=batch_size, num_workers=8, shuffle=True, drop_last=True)

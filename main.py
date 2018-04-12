@@ -12,7 +12,6 @@ import torchvision.utils as vutils
 
 from data import *
 from models import *
-from util import *
 import time
 
 
@@ -29,10 +28,10 @@ def adjust_learning_rate(optimizer, epoch):
         param_group['lr'] = lr
 
 
-generator = Generator()
+generator = Generator(tag_num)
 generator.apply(weights_init)
 
-discriminator = Discriminator()
+discriminator = Discriminator(tag_num)
 discriminator.apply(weights_init)
 
 opt_g = torch.optim.Adam(generator.parameters(), lr=learning_rate, betas=(0.5, 0.999))
@@ -146,19 +145,11 @@ for epoch in range(start_epoch, max_epochs):
                  loss_g_tag.data[0]))
 
         if batch_idx % 100 == 0:
-            vutils.save_image(data,
-                    'samples/real_samples.png')
             fake = generator(rep)
             vutils.save_image(fake.data.view(batch_size, 3, imsize, imsize),
                     'samples/fake_samples_epoch_%03d.png' % epoch)
 
             is_best = False
-
-            ### Should not be able to define a best model..
-            # total_loss = loss_d.data[0] + loss_g.data[0]
-            # if total_loss < best_loss:
-            #     best_loss = total_loss
-            #     is_best = True
 
             save_checkpoint({
                 'epoch': epoch,

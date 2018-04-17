@@ -167,16 +167,23 @@ class Discriminator(nn.Module):
         return self.head1(x), self.head2(x) # Use with numerically stable torch.nn.BCEWithLogitsLoss() during training
         # return self.sigmoid(self.head1(x)), self.sigmoid(self.head2(x))
 
-# g = Generator()
-# d = Discriminator()
-# testx = Variable(torch.randn(1,128+19))
-# out = g(testx)
-# print out.size()
-# h1, h2 = d(out)
-# print h1.size()
-# print h2.size()
 
-# x = Variable(torch.randn(1,1,128))
-# y = Variable(torch.randn(1,1,18))
-# z = torch.cat((x, y), 2)
-# print z.size()
+def unit_test(tn=10):
+    batch_size = 1
+    img_size = 128
+    g = Generator(tag_num=tn)
+    d = Discriminator(tag_num=tn)
+    x = Variable(torch.ones(batch_size, img_size+tn))
+
+    out = g(x)
+    print(out.size())
+    h1, h2 = d(out)
+    print(h1.size())
+    print(h2.size())
+
+    vutils.save_image(out.data.view(batch_size, 3, img_size, img_size),
+                      'samples/fake_samples.png')
+
+if __name__ == '__main__':
+    import torchvision.utils as vutils
+    unit_test()

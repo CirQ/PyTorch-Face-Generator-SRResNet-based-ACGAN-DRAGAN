@@ -28,10 +28,10 @@ def adjust_learning_rate(optimizer, epoch):
         param_group['lr'] = lr
 
 
-generator = Generator(tag_num)
+generator = Generator(tag_num=tag_num)
 generator.apply(weights_init)
 
-discriminator = Discriminator(tag_num)
+discriminator = Discriminator(tag_num=tag_num)
 discriminator.apply(weights_init)
 
 opt_g = torch.optim.Adam(generator.parameters(), lr=learning_rate, betas=(0.5, 0.999))

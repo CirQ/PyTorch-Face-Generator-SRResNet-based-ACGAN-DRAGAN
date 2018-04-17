@@ -1,18 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import argparse
 import shutil
 
-import numpy as np
-import torch
 from torch.autograd import Variable, grad
-from torch.nn.init import xavier_normal
-from torchvision import datasets, transforms
-import torchvision.utils as vutils
 
 from data import *
 from models import *
-import time
 
 
 def save_checkpoint(state, is_best, filename='checkpoint.pth.tar'):

@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import argparse
 import shutil
 
 import numpy as np
 import torch
 from torch.autograd import Variable, grad
-from torch.nn.init import xavier_normal
-from torchvision import datasets, transforms
 import torchvision.utils as vutils
 
 from data import *
@@ -28,7 +25,7 @@ def adjust_learning_rate(optimizer, epoch):
         param_group['lr'] = lr
 
 
-generator = Generator(tag_num)
+generator = Generator(tag_num=tag_num)
 generator.apply(weights_init)
 
 discriminator = Discriminator(tag_num)

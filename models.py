@@ -6,7 +6,6 @@ Implements models in https://arxiv.org/pdf/1708.05509.pdf
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.autograd import Variable
 
 def swish(x):
     return x * F.sigmoid(x)

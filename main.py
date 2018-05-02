@@ -3,6 +3,7 @@
 import shutil
 
 from torch.autograd import Variable, grad
+import torchvision.utils as vutils
 
 from data import *
 from models import *
